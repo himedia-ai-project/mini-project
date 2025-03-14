@@ -27,7 +27,7 @@ export default function Box({
         className="flex flex-col items-center justify-center rounded-md bg-[#E5EBFD] w-[540px] h-[250px] pt-[30px] pr-[25px] pb-[30px] pl-[25px]"
         style={{ width, height }}
       >
-        <div className="w-full flex justify-end items-end mb-[15px]">
+        <div className="w-full flex justify-end items-end mb-[10px]">
           <p className="text-2xl pr-[7px] font-semibold" dangerouslySetInnerHTML={{ __html: maintext }}></p>
           <Image 
             src={numberImage} 
