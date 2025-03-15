@@ -1,6 +1,6 @@
 "use client";
 
-import { TextField } from '@mui/material';
+import { SxProps, TextField } from "@mui/material";
 
 interface InputProps {
   label: string;
@@ -8,12 +8,20 @@ interface InputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
   placeholder?: string;
+  sx?: SxProps;
 }
 
-const InputCommon = ({ label, value, onChange, type = "text", placeholder }: InputProps) => {
+const InputCommon = ({
+  label,
+  value,
+  onChange,
+  type = "text",
+  placeholder,
+}: InputProps) => {
   return (
     <TextField
       label={label}
+      size="small"
       value={value}
       onChange={onChange}
       type={type}
@@ -21,22 +29,22 @@ const InputCommon = ({ label, value, onChange, type = "text", placeholder }: Inp
       variant="outlined"
       fullWidth
       sx={{
-        width: '320px',
-        height: '32px',
-        '& .MuiInputBase-root': {
-          height: '32px',
+        width: "320px",
+        height: "32px",
+        "& .MuiInputBase-root": {
+          height: "32px",
         },
-        '& .MuiInputLabel-root': {
-          fontSize: '14px',
+        "& .MuiInputLabel-root": {
+          fontSize: "14px",
         },
-        '& .MuiOutlinedInput-input': {
-          fontSize: '14px',
+        "& .MuiOutlinedInput-input": {
+          fontSize: "14px",
         },
-        '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: '#757575',
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: "#757575",
         },
-        '& .MuiInputBase-input::placeholder': {
-          color: '#757575',
+        "& .MuiInputBase-input::placeholder": {
+          color: "#757575",
         },
       }}
     />
