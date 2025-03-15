@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import FileBox from "./component/FileBox";
 import InfoBox from "./component/InfoBox";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       </div>
       <div>
         <InfoBox />
+        <FileBox />
       </div>
     </div>
   );
