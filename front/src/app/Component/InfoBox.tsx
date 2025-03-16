@@ -11,57 +11,43 @@ export default function InfoBox() {
   const [gender, setGender] = useState("");
   const [object, setObject] = useState("");
   const [issue, setIssue] = useState("");
-
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
-  const handleAgeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAge(e.target.value);
-  };
-
-  const handleGenderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setGender(e.target.value);
-  };
-
-  const handelObjectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setObject(e.target.value);
-  };
-
-  const handleIssueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIssue(e.target.value);
-  };
+  const [isExpand, setIsExpand] = useState(false);
 
   const input = [
     {
       label: "이름",
-      placeholder: "이름을 입력하세요(ex 홍길동 or 길동)",
       value: name,
-      onChange: handleNameChange,
+      placeholder: "이름을 입력해주세요 (ex 홍길동 or 길동)",
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+        setName(e.target.value),
     },
     {
       label: "나이",
-      placeholder: "나이를 입력하세요(ex 25살 or 25)",
       value: age,
-      onChange: handleAgeChange,
+      placeholder: "나이을 입력해주세요 (ex 25살)",
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+        setAge(e.target.value),
     },
     {
       label: "성별",
-      placeholder: "성별를 입력하세요(ex 여자 or 남자)",
       value: gender,
-      onChange: handleGenderChange,
+      placeholder: "성별을 입력해주세요 (ex 여자 or 여)",
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+        setGender(e.target.value),
     },
     {
       label: "목적",
-      placeholder: "목적를 입력하세요(ex 운동으로 감량중)",
       value: object,
-      onChange: handelObjectChange,
+      placeholder: "목적을 입력해주세요 (ex 감량중입니다)",
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+        setObject(e.target.value),
     },
     {
       label: "특이사항",
-      placeholder: "특이사항을 입력하세요(ex 알러지 or 질병 or 없음)",
       value: issue,
-      onChange: handleIssueChange,
+      placeholder: "특이사항을 입력해주세요 (ex 새우알러지 or 병명)",
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+        setIssue(e.target.value),
     },
   ];
 
@@ -71,18 +57,25 @@ export default function InfoBox() {
         imageSrc="/main_1.svg"
         numberImage="/number_1.svg"
         maintext="Info"
-        buttonText="정보 입력하기"
+        buttonText={isExpand ? "닫기" : "정보 입력하기"}
         text='내 정보를 입력하면 <strong class="font-extrabold">더 정확한 정보를 얻고,<br/>그에 맞는 정보를 자세히</strong> 알아볼 수 있어요!'
         width="540px"
         height="250px"
+        isExpand={isExpand}
         expandContent={
-          <div className="flex flex-col items-start gap-2">
-            {input.map((input, index) => (
-              <InputCommon key={index} sx={{ mb: 2 }} {...input} />
-            ))}
-            <ButtonCommon text="정보 입력하기" />
-          </div>
+          isExpand ? (
+            <div className="flex flex-col gap-2">
+              {input.map((field, index) => (
+                <InputCommon key={index} {...field} sx={{ mb: 2 }} />
+              ))}
+              <ButtonCommon
+                text="정보 제출하기"
+                onClick={() => setIsExpand(false)}
+              />
+            </div>
+          ) : null
         }
+        onClick={() => setIsExpand(!isExpand)}
       />
     </>
   );

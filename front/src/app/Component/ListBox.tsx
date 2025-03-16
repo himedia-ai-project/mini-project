@@ -6,10 +6,10 @@ export default function ListBox() {
   return (
     <Box
       imageSrc="/main_4.svg"
-      numberImage="/number_3.svg"
+      numberImage="/number_4.svg"
       maintext="List"
       buttonText="리스트 보기"
-      text='입력한 정보와 파일을 바탕으로 <br/> <strong class="font-extrabold">정확한 분석 결과와 세부 정보를 확인</strong> 하세요!'
+      text='입력된 데이터를 분석하여 내 결과와 함께 <br/> <strong class="font-extrabold">다른 사용자들의 정보</strong>  도 확인하세요!'
       width="540px"
       height="250px"
     />
