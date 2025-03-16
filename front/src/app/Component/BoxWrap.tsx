@@ -149,7 +149,7 @@ export default function BoxWrap() {
   return (
     <>
       {boxData.map((box, index) => (
-        <>
+        <div key={index}>
           <Box
             key={index}
             imageSrc={box.imageSrc}
@@ -163,7 +163,7 @@ export default function BoxWrap() {
             expandContent={expandStates[index] ? box.expandContent : null}
             onClick={() => toggleExpand(index)} // 클릭 시 해당 박스만 열기
           />
-        </>
+        </div>
       ))}
     </>
   );

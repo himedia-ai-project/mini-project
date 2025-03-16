@@ -8,6 +8,7 @@ interface InputProps {
   type?: string;
   placeholder?: string;
   sx?: SxProps;
+  label: string;
 }
 
 const InputCommon = ({
@@ -15,9 +16,11 @@ const InputCommon = ({
   onChange,
   type = "text",
   placeholder,
+  label,
 }: InputProps) => {
   return (
     <TextField
+      label={label}
       size="small"
       value={value}
       onChange={onChange}
