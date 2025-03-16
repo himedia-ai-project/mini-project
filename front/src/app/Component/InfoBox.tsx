@@ -15,37 +15,37 @@ export default function InfoBox() {
 
   const input = [
     {
-      label: "이름",
       value: name,
       placeholder: "이름을 입력해주세요 (ex 홍길동 or 길동)",
+      description: "이름",
       onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
         setName(e.target.value),
     },
     {
-      label: "나이",
       value: age,
       placeholder: "나이을 입력해주세요 (ex 25살)",
+      description: "나이",
       onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
         setAge(e.target.value),
     },
     {
-      label: "성별",
       value: gender,
       placeholder: "성별을 입력해주세요 (ex 여자 or 여)",
+      description: "성별",
       onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
         setGender(e.target.value),
     },
     {
-      label: "목적",
       value: object,
       placeholder: "목적을 입력해주세요 (ex 감량중입니다)",
+      description: "목적",
       onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
         setObject(e.target.value),
     },
     {
-      label: "특이사항",
       value: issue,
       placeholder: "특이사항을 입력해주세요 (ex 새우알러지 or 병명)",
+      description: "특이사항",
       onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
         setIssue(e.target.value),
     },
@@ -66,7 +66,12 @@ export default function InfoBox() {
           isExpand ? (
             <div className="flex flex-col gap-2">
               {input.map((field, index) => (
-                <InputCommon key={index} {...field} sx={{ mb: 2 }} />
+                <div key={index} className="flex flex-col">
+                  <p className="text-gray-600 text-sm mb-1">
+                    {field.description}
+                  </p>
+                  <InputCommon {...field} sx={{ mb: 2 }} />
+                </div>
               ))}
               <ButtonCommon
                 text="정보 제출하기"

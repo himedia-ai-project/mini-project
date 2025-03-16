@@ -70,7 +70,11 @@ export default function FileBox() {
                     }}
                   />
                 ) : (
-                  <p className="text-gray-500">미리보기 없음</p>
+                  <p className="text-gray-500">
+                    파일을 업로드 해주세요.
+                    <br />
+                    (.png .jpg .jpeg 가능)
+                  </p>
                 )}
               </div>
 

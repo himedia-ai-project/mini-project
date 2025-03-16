@@ -3,7 +3,6 @@
 import { SxProps, TextField } from "@mui/material";
 
 interface InputProps {
-  label: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
@@ -12,7 +11,6 @@ interface InputProps {
 }
 
 const InputCommon = ({
-  label,
   value,
   onChange,
   type = "text",
@@ -20,7 +18,6 @@ const InputCommon = ({
 }: InputProps) => {
   return (
     <TextField
-      label={label}
       size="small"
       value={value}
       onChange={onChange}
@@ -31,6 +28,7 @@ const InputCommon = ({
       sx={{
         width: "320px",
         height: "32px",
+        backgroundColor: "white",
         "& .MuiInputBase-root": {
           height: "32px",
         },
