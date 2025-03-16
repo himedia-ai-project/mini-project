@@ -1,4 +1,4 @@
-"use client";
+
 
 import { useState } from "react";
 import Box from "../common/BoxCommon";
