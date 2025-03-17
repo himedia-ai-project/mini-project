@@ -16,9 +16,9 @@ class AnalyzeRequest(BaseModel):
     name: str
     gender: str
     age: int
-    health_conditions: str
-    goal: str
-    image: str
+    issue: str
+    object: str
+    issue: str
 
 @app.post("/process")
 async def process_food(request: AnalyzeRequest):
@@ -35,8 +35,8 @@ async def process_food(request: AnalyzeRequest):
         - 이름: {request.name}
         - 성별: {request.gender}
         - 나이: {request.age}
-        - 건강 상태(질병 및 알레르기): {request.health_conditions}
-        - 목표: {request.goal}
+        - 건강 상태(질병 및 알레르기): {request.issue}
+        - 목표: {request.object}
 
         [제품 성분표]
         {response.text}

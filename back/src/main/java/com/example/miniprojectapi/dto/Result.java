@@ -17,8 +17,8 @@ public class Result {
     private String name;
     private String gender;
     private Integer age;
-    private String healthConditions;
-    private String goal;
+    private String issue;
+    private String object;
 
     private List<Ingredients> ingredients = new ArrayList<>();
     private List<Compatibility> compatibilities = new ArrayList<>();

@@ -29,11 +29,11 @@ public class UserInfo {
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @Column(name = "health_conditions")
-    private String healthConditions;
+    @Column(name = "issue")
+    private String issue;
 
-    @Column(name = "goal")
-    private String goal;
+    @Column(name = "object")
+    private String object;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user")

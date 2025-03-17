@@ -13,6 +13,6 @@ public class InfoRequest {
     private String name;
     private String gender;
     private Integer age;
-    private String healthConditions;
-    private String goal;
+    private String issue;
+    private String object;
 }

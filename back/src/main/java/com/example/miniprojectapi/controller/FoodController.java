@@ -37,8 +37,8 @@ public class FoodController {
             @RequestParam("name") String name,
             @RequestParam("gender") String gender,
             @RequestParam("age") Integer age,
-            @RequestParam("health_conditions") String healthConditions,
-            @RequestParam("goal") String goal,
+            @RequestParam("issue") String issue,
+            @RequestParam("object") String object,
             @RequestParam("image") MultipartFile image
     ) {
         try {
@@ -49,8 +49,8 @@ public class FoodController {
             requestData.put("name", name);
             requestData.put("gender", gender);
             requestData.put("age", age);
-            requestData.put("health_conditions", healthConditions);
-            requestData.put("goal", goal);
+            requestData.put("issue", issue);
+            requestData.put("object", object);
             requestData.put("image", base64Image);
 
             String response = webClient.post()
@@ -64,7 +64,7 @@ public class FoodController {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonResponse = objectMapper.readTree(response);
 
-            foodService.save(jsonResponse, name, gender, age, healthConditions, goal);
+            foodService.save(jsonResponse, name, gender, age, issue, object);
 
             return ResponseEntity.ok("분석 및 db 저장 완료");
         } catch (IOException e) {

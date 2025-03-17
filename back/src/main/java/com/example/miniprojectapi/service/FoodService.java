@@ -27,13 +27,13 @@ public class FoodService {
     private final CompatibilityRepository compatibilityRepository;
     private final AgeWarningsRepository ageWarningsRepository;
 
-    public void save(JsonNode jsonData, String name, String gender, Integer age, String healthConditions, String goal) {
+    public void save(JsonNode jsonData, String name, String gender, Integer age, String issue, String object) {
         UserInfo userInfo = UserInfo.builder()
                 .name(name)
                 .gender(gender)
                 .age(age)
-                .healthConditions(healthConditions)
-                .goal(goal)
+                .issue(issue)
+                .object(object)
                 .build();
 
         userInfo = userInfoRepository.save(userInfo);
@@ -125,11 +125,17 @@ public class FoodService {
 
     public Result result(String name) {
         UserInfo userInfo = userInfoRepository.findByName(name);
+        if (userInfo == null) {
+            throw new EntityNotFoundException("존재하지 않는 이름입니다.");
+        }
         return buildResult(userInfo);
     }
 
     public List<Result> all() {
         List<UserInfo> userInfos = userInfoRepository.findAll();
+        if (userInfos.isEmpty()) {
+            throw new EntityNotFoundException("현재 분석된 정보가 없습니다.");
+        }
         return userInfos.stream().map(this::buildResult).collect(Collectors.toList());
     }
 
@@ -138,8 +144,8 @@ public class FoodService {
                 .name(userInfo.getName())
                 .gender(userInfo.getGender())
                 .age(userInfo.getAge())
-                .healthConditions(userInfo.getHealthConditions())
-                .goal(userInfo.getGoal())
+                .issue(userInfo.getIssue())
+                .object(userInfo.getObject())
                 .ingredients(userInfo.getIngredients())
                 .compatibilities(userInfo.getCompatibilities())
                 .ageWarnings(userInfo.getAgeWarnings())
