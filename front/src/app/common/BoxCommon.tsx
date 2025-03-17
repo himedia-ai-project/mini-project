@@ -39,7 +39,7 @@ export default function Box({
           <>
             <div className="w-full flex justify-end items-end mb-[10px]">
               <p
-                className="text-2xl pr-[7px] font-semibold text-black"
+                className="text-2xl pr-[7px] font-semibold text-black break-words whitespace-normal"
                 dangerouslySetInnerHTML={{ __html: maintext }}
               ></p>
               <Image
@@ -54,9 +54,9 @@ export default function Box({
             <div className="flex flex-row items-start justify-start w-full h-[130px] pt-[13px]">
               <Image src={imageSrc} alt="logo" width={130} height={100} />
 
-              <div className="flex flex-col items-start justify-start h-full w-[350px] ml-[45px]">
+              <div className="flex flex-col items-start justify-start h-full w-[350px] ml-[30px]">
                 <p
-                  className="text-gray-700 text-left mb-[16px] text-[18px] overflow-hidden text-ellipsis"
+                  className="text-gray-700 text-left mb-[16px] text-[18px] break-words whitespace-normal"
                   dangerouslySetInnerHTML={{ __html: text }}
                 />
                 <Button text={buttonText} onClick={onClick || (() => {})} />
