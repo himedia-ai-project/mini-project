@@ -28,7 +28,7 @@ public class FoodController {
 
     @Autowired
     public FoodController(WebClient.Builder webClientBuilder, FoodService foodService) {
-        this.webClient = webClientBuilder.baseUrl("http://127.0.0.1:8000").build();
+        this.webClient = webClientBuilder.baseUrl("http://fastapi:8000").build();
         this.foodService = foodService;
     }
 

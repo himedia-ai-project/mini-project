@@ -109,13 +109,31 @@ public class FoodService {
         List<TotalResult> totalResults = new ArrayList<>();
         JsonNode totalResultNode = jsonData.path("total_result");
 
-        String[] totalResultTypes = {"bad_ingredient", "good_ingredient", "total_result"};
-        for (String type : totalResultTypes) {
-            JsonNode node = totalResultNode.path(type);
-            if (node.isTextual()) {
-                TotalResult totalResult = createTotalResult(node.asText(), type, userInfo);
-                totalResults.add(totalResult);
-            }
+        JsonNode badNode = totalResultNode.path("bad_ingredient");
+        if (badNode.isTextual()) {
+            TotalResult result = new TotalResult();
+            result.setDescription(badNode.asText());
+            result.setType(TotalType.BAD);
+            result.setUser(userInfo);
+            totalResults.add(result);
+        }
+
+        JsonNode goodNode = totalResultNode.path("good_ingredient");
+        if (goodNode.isTextual()) {
+            TotalResult result = new TotalResult();
+            result.setDescription(badNode.asText());
+            result.setType(TotalType.GOOD);
+            result.setUser(userInfo);
+            totalResults.add(result);
+        }
+
+        JsonNode totalNode = totalResultNode.path("total_result");
+        if (badNode.isTextual()) {
+            TotalResult result = new TotalResult();
+            result.setDescription(totalNode.asText());
+            result.setType(TotalType.RESULT);
+            result.setUser(userInfo);
+            totalResults.add(result);
         }
 
         return totalResults;
@@ -127,14 +145,6 @@ public class FoodService {
         compatibility.setType(CompatibilityType.valueOf(type.toUpperCase()));
         compatibility.setUser(userInfo);
         return compatibility;
-    }
-
-    private TotalResult createTotalResult(String description, String type, UserInfo userInfo) {
-        TotalResult totalResult = new TotalResult();
-        totalResult.setDescription(description);
-        totalResult.setType(TotalType.valueOf(type.toUpperCase()));
-        totalResult.setUser(userInfo);
-        return totalResult;
     }
 
     public Result result(String name) {

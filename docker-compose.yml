@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    ports:
+      - 3308:3306
+    volumes:
+      - ./db/db_data:/var/lib/mysql
+    networks:
+      - container_network
+
+  backend:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/food?useSSL=false&serverTimeZone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_DRIVER: com.mysql.cj.jdbc.Driver
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+    networks:
+      - container_network
+
+  fastapi:
+    build:
+      context: ./back/fastapi
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8000:8000
+    networks:
+      - container_network
+    environment:
+      API_KEY: "AIzaSyBfnGKTOg1aBcG4TnU4nbJPIOKwMd01nf0"
+
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+      - fastapi
+    networks:
+      - container_network
+    environment:
+      NODE_ENV: "production"
+
+networks:
+  container_network:

@@ -1,0 +1,82 @@
+# 공통 무시 파일 설정
+
+# 시스템 파일
+.DS_Store
+*.log
+*.pem
+*.swp
+
+# 환경 설정 파일 (선택적으로 관리)
+.env*
+.vercel
+
+# 빌드 결과 무시
+/build
+/dist
+/out
+node_modules
+/coverage
+
+# Backend (Spring Boot - ./back/) 무시 파일
+
+### Gradle ###
+back/.gradle
+back/build/
+!back/gradle/wrapper/gradle-wrapper.jar
+!back/**/src/main/**/build/
+!back/**/src/test/**/build/
+
+### STS (Spring Tool Suite) ###
+back/.apt_generated
+back/.classpath
+back/.factorypath
+back/.project
+back/.settings
+back/.springBeans
+back/.sts4-cache
+back/bin/
+!back/**/src/main/**/bin/
+!back/**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+back/.idea
+back/*.iws
+back/*.iml
+back/*.ipr
+back/out/
+!back/**/src/main/**/out/
+!back/**/src/test/**/out/
+
+### NetBeans ###
+back/nbproject/private/
+back/nbbuild/
+back/dist/
+back/nbdist/
+back/.nb-gradle/
+
+### VS Code ###
+back/.vscode/
+
+# Frontend (Next.js, React - ./front/) 무시 파일
+
+# Next.js 빌드 결과
+front/.next/
+front/next-env.d.ts
+front/*.tsbuildinfo
+
+# Yarn & NPM
+front/.pnp
+front/.pnp.*
+front/.yarn/*
+front/npm-debug.log*
+front/yarn-debug.log*
+front/yarn-error.log*
+front/.pnpm-debug.log*
+
+# MySQL & DB 관련 파일 무시 (./db/)
+db/db_data/
+db/db_data/*
+db/db_data/*.sock
+db/db_data/*.pid
+db/db_data/mysql.sock
+db/db_data/mysql.pid
