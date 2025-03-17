@@ -139,7 +139,7 @@ export default function BoxWrap() {
       numberImage: "/number_4.svg",
       maintext: "List",
       buttonText: "리스트 보기",
-      text: '입력된 데이터를 분석하여 내 결과와 함께 <strong class="font-extrabold"><br/>다른 사용자들의 정보</strong>  도 확인하세요!',
+      text: '입력된 데이터를 분석하여 내 결과와 함께 <strong class="font-extrabold"><br/>다른 사용자들의 결과정보</strong>  도 확인하세요!',
       width: "540px",
       height: "250px",
       expandContent: <ListForm />,
