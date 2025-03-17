@@ -1,17 +1,13 @@
 package com.example.miniprojectapi.service;
 
 import com.example.miniprojectapi.dto.Result;
-import com.example.miniprojectapi.entity.AgeWarnings;
-import com.example.miniprojectapi.entity.Compatibility;
-import com.example.miniprojectapi.entity.Ingredients;
-import com.example.miniprojectapi.entity.UserInfo;
+import com.example.miniprojectapi.entity.*;
 import com.example.miniprojectapi.enums.AgeWarningsType;
 import com.example.miniprojectapi.enums.CompatibilityType;
-import com.example.miniprojectapi.repository.AgeWarningsRepository;
-import com.example.miniprojectapi.repository.CompatibilityRepository;
-import com.example.miniprojectapi.repository.IngredientsRepository;
-import com.example.miniprojectapi.repository.UserInfoRepository;
+import com.example.miniprojectapi.enums.TotalType;
+import com.example.miniprojectapi.repository.*;
 import com.fasterxml.jackson.databind.JsonNode;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +22,7 @@ public class FoodService {
     private final IngredientsRepository ingredientsRepository;
     private final CompatibilityRepository compatibilityRepository;
     private final AgeWarningsRepository ageWarningsRepository;
+    private final TotalResultRepository totalResultRepository;
 
     public void save(JsonNode jsonData, String name, String gender, Integer age, String issue, String object) {
         UserInfo userInfo = UserInfo.builder()
@@ -46,6 +43,9 @@ public class FoodService {
 
         List<AgeWarnings> ageWarnings = extractAgeWarnings(jsonData, userInfo);
         ageWarningsRepository.saveAll(ageWarnings);
+
+        List<TotalResult> totalResults = extractTotalResult(jsonData, userInfo);
+        totalResultRepository.saveAll(totalResults);
     }
 
     private List<Ingredients> extractIngredients(JsonNode jsonData, UserInfo userInfo) {
@@ -68,31 +68,13 @@ public class FoodService {
         List<Compatibility> healthCompatibilities = new ArrayList<>();
         JsonNode compatibilityNode = jsonData.path("compatibility");
 
-        JsonNode positiveNode = compatibilityNode.path("positive");
-        positiveNode.fieldNames().forEachRemaining(fieldName -> {
-            Compatibility compatibility = new Compatibility();
-            compatibility.setDescription(positiveNode.path(fieldName).asText());
-            compatibility.setType(CompatibilityType.POSITIVE);
-            compatibility.setUser(userInfo);
-            healthCompatibilities.add(compatibility);
-        });
-
-        JsonNode negativeNode = compatibilityNode.path("negative");
-        negativeNode.fieldNames().forEachRemaining(fieldName -> {
-            Compatibility compatibility = new Compatibility();
-            compatibility.setDescription(negativeNode.path(fieldName).asText());
-            compatibility.setType(CompatibilityType.NEGATIVE);
-            compatibility.setUser(userInfo);
-            healthCompatibilities.add(compatibility);
-        });
-
-        JsonNode evaluationNode = compatibilityNode.path("evaluation");
-        if (evaluationNode.isTextual()) {
-            Compatibility compatibility = new Compatibility();
-            compatibility.setDescription(evaluationNode.asText());
-            compatibility.setType(CompatibilityType.EVALUATION);
-            compatibility.setUser(userInfo);
-            healthCompatibilities.add(compatibility);
+        String[] compatibilityTypes = {"positive", "negative", "evaluation"};
+        for (String type : compatibilityTypes) {
+            JsonNode node = compatibilityNode.path(type);
+            if (node.isTextual()) {
+                Compatibility compatibility = createCompatibility(node.asText(), type, userInfo);
+                healthCompatibilities.add(compatibility);
+            }
         }
 
         return healthCompatibilities;
@@ -103,13 +85,13 @@ public class FoodService {
         JsonNode ageWarningNode = jsonData.path("age_warning");
 
         JsonNode warningNode = ageWarningNode.path("age_warning");
-        warningNode.fieldNames().forEachRemaining(fieldName -> {
+        if (warningNode.isTextual()) {
             AgeWarnings warning = new AgeWarnings();
-            warning.setDescription(warningNode.path(fieldName).asText());
+            warning.setDescription(warningNode.asText());
             warning.setType(AgeWarningsType.AGE_WARNING);
             warning.setUser(userInfo);
             ageWarnings.add(warning);
-        });
+        }
 
         JsonNode adviceNode = ageWarningNode.path("advice");
         if (adviceNode.isTextual()) {
@@ -121,6 +103,38 @@ public class FoodService {
         }
 
         return ageWarnings;
+    }
+
+    private List<TotalResult> extractTotalResult(JsonNode jsonData, UserInfo userInfo) {
+        List<TotalResult> totalResults = new ArrayList<>();
+        JsonNode totalResultNode = jsonData.path("total_result");
+
+        String[] totalResultTypes = {"bad_ingredient", "good_ingredient", "total_result"};
+        for (String type : totalResultTypes) {
+            JsonNode node = totalResultNode.path(type);
+            if (node.isTextual()) {
+                TotalResult totalResult = createTotalResult(node.asText(), type, userInfo);
+                totalResults.add(totalResult);
+            }
+        }
+
+        return totalResults;
+    }
+
+    private Compatibility createCompatibility(String description, String type, UserInfo userInfo) {
+        Compatibility compatibility = new Compatibility();
+        compatibility.setDescription(description);
+        compatibility.setType(CompatibilityType.valueOf(type.toUpperCase()));
+        compatibility.setUser(userInfo);
+        return compatibility;
+    }
+
+    private TotalResult createTotalResult(String description, String type, UserInfo userInfo) {
+        TotalResult totalResult = new TotalResult();
+        totalResult.setDescription(description);
+        totalResult.setType(TotalType.valueOf(type.toUpperCase()));
+        totalResult.setUser(userInfo);
+        return totalResult;
     }
 
     public Result result(String name) {
@@ -149,6 +163,7 @@ public class FoodService {
                 .ingredients(userInfo.getIngredients())
                 .compatibilities(userInfo.getCompatibilities())
                 .ageWarnings(userInfo.getAgeWarnings())
+                .totalResults(userInfo.getTotalResults())
                 .build();
     }
 }

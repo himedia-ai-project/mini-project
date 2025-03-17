@@ -66,6 +66,7 @@ public class FoodController {
 
             foodService.save(jsonResponse, name, gender, age, issue, object);
 
+//            return ResponseEntity.ok(jsonResponse);
             return ResponseEntity.ok("분석 및 db 저장 완료");
         } catch (IOException e) {
             return ResponseEntity.badRequest().body("문제 발생");

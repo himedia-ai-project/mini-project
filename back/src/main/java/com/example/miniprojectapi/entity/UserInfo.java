@@ -47,4 +47,8 @@ public class UserInfo {
     @OneToMany(mappedBy = "user")
     private List<AgeWarnings> ageWarnings = new ArrayList<>();
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
+    private List<TotalResult> totalResults = new ArrayList<>();
+
 }
