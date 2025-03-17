@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function MainBox() {
   return (
     <>
-      <div className="mt-[300px] pl-[30px] pt-[100px] pb-[60px] pr-[30px]">
+      <div className="pl-[30px] pt-[100px] pb-[60px] pr-[30px]">
         <Image
           src="/logo.svg"
           alt="logo"

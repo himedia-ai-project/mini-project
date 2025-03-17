@@ -29,7 +29,7 @@ export default function Box({
     <div className="flex items-center justify-center mb-[10px]">
       <div
         className={`flex flex-col items-center justify-center rounded-md bg-[#E5EBFD] pt-[30px] pr-[25px] pb-[30px] pl-[25px] transition-all duration-500 ${
-          isExpand ? "h-[450px]" : "h-[250px]"
+          isExpand ? "h-auto" : "h-[250px]"
         }`}
         style={{ width }}
       >

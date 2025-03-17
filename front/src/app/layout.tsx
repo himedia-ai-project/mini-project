@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full w-full">
       <body
-        className={`${notoSans.variable} antialiased flex justify-center items-center bg-gray-100`}
+        className={`${notoSans.variable} antialiased bg-gray-100 h-full overflow-auto`}
       >
         <div className="w-[600px] min-h-screen bg-white shadow-lg overflow-auto">
           {children}

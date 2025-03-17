@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Box from "../common/BoxCommon";
-import UserInfoForm from "./UserInfoForm";
-import FileInfoForm from "./FileInfoForm";
 import axiosInstance from "../lib/axios";
+import FileInfoForm from "./FileInfoForm";
+import ListForm from "./ListForm";
+import ResultForm from "./ResultForm";
+import UserInfoForm from "./UserInfoForm";
 
 export default function BoxWrap() {
   // 4개의 박스를 기본으로 시작, 필요에 따라 확장
@@ -126,23 +128,21 @@ export default function BoxWrap() {
       imageSrc: "/main_3.svg",
       numberImage: "/number_3.svg",
       maintext: "List",
-      buttonText: "리스트 보기",
+      buttonText: "결과 보기",
       text: '입력된 데이터를 분석하여 내 결과와 함께 <br/> <strong class="font-extrabold">다른 사용자들의 정보</strong>  도 확인하세요!',
       width: "540px",
       height: "250px",
-      //여기 부분 수정 필요
-      // expandContent: <UserInfoForm />,
+      expandContent: <ResultForm />,
     },
     {
       imageSrc: "/main_4.svg",
       numberImage: "/number_4.svg",
-      maintext: "Details",
+      maintext: "List",
       buttonText: "리스트 보기",
       text: '입력된 데이터를 분석하여 내 결과와 함께 <br/> <strong class="font-extrabold">다른 사용자들의 정보</strong>  도 확인하세요!',
       width: "540px",
       height: "250px",
-      //여기 부분 수정 필요 임시
-      // expandContent: <UserInfoForm />,
+      expandContent: <ListForm />,
     },
   ];
 

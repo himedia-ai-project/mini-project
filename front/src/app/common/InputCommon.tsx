@@ -8,7 +8,8 @@ interface InputProps {
   type?: string;
   placeholder?: string;
   sx?: SxProps;
-  label: string;
+  // label: string;
+  labelName: string;
 }
 
 const InputCommon = ({
@@ -16,39 +17,43 @@ const InputCommon = ({
   onChange,
   type = "text",
   placeholder,
-  label,
+  // label,
+  labelName,
 }: InputProps) => {
   return (
-    <TextField
-      label={label}
-      size="small"
-      value={value}
-      onChange={onChange}
-      type={type}
-      placeholder={placeholder}
-      variant="outlined"
-      fullWidth
-      sx={{
-        width: "320px",
-        height: "32px",
-        backgroundColor: "white",
-        "& .MuiInputBase-root": {
+    <div className="flex flex-col w-full">
+      <p className="text-gray-700 text-sm mb-[5px] font-bold">{labelName}</p>
+      <TextField
+        // label={label}
+        size="small"
+        value={value}
+        onChange={onChange}
+        type={type}
+        placeholder={placeholder}
+        variant="outlined"
+        fullWidth
+        sx={{
+          width: "320px",
           height: "32px",
-        },
-        "& .MuiInputLabel-root": {
-          fontSize: "14px",
-        },
-        "& .MuiOutlinedInput-input": {
-          fontSize: "14px",
-        },
-        "& .MuiOutlinedInput-notchedOutline": {
-          borderColor: "#757575",
-        },
-        "& .MuiInputBase-input::placeholder": {
-          color: "#757575",
-        },
-      }}
-    />
+          backgroundColor: "white",
+          "& .MuiInputBase-root": {
+            height: "32px",
+          },
+          "& .MuiInputLabel-root": {
+            fontSize: "14px",
+          },
+          "& .MuiOutlinedInput-input": {
+            fontSize: "14px",
+          },
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#757575",
+          },
+          "& .MuiInputBase-input::placeholder": {
+            color: "#757575",
+          },
+        }}
+      />
+    </div>
   );
 };
 

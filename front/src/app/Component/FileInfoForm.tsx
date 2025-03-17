@@ -55,7 +55,7 @@ export default function FileInfoForm({
           onClick={() => document.getElementById("fileInput")?.click()}
         />
 
-        <Button text="파일 업로드" onClick={handleFileSubmit} />
+        <Button text="정보 제출" onClick={handleFileSubmit} />
       </div>
     </div>
   );
