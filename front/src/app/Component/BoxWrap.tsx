@@ -111,8 +111,8 @@ export default function BoxWrap() {
       imageSrc: "/main_2.svg",
       numberImage: "/number_2.svg",
       maintext: "Details",
-      buttonText: "상세 입력하기",
-      text: '이 정보를 입력하면 <strong class="font-extrabold">맞춤형 결과를 얻을 수 있습니다.</strong>',
+      buttonText: "파일 업로드하기",
+      text: '저장되어있는 파일을 업로드하면,<br/> <strong class="font-extrabold">정보와 맞는 맞춤형 결과</strong>를 얻을 수 있습니다.',
       width: "540px",
       height: "250px",
       expandContent: (
@@ -127,9 +127,9 @@ export default function BoxWrap() {
     {
       imageSrc: "/main_3.svg",
       numberImage: "/number_3.svg",
-      maintext: "List",
+      maintext: "Result",
       buttonText: "결과 보기",
-      text: '입력된 데이터를 분석하여 내 결과와 함께 <br/> <strong class="font-extrabold">다른 사용자들의 정보</strong>  도 확인하세요!',
+      text: '입력된 데이터를 분석하여 내 정보와 맞는 <br/><strong class="font-extrabold">성분 결과와 전체적인 결과</strong>를 확인하세요!',
       width: "540px",
       height: "250px",
       expandContent: <ResultForm />,
