@@ -111,8 +111,8 @@ export default function BoxWrap() {
       imageSrc: "/main_2.svg",
       numberImage: "/number_2.svg",
       maintext: "Details",
-      buttonText: "파일 업로드하기",
-      text: '저장되어있는 파일을 업로드하면,<strong class="font-extrabold"><br/>정보와 맞는 맞춤형 결과</strong>를 얻을 수 있습니다.',
+      buttonText: "파일 업로드",
+      text: '저장되어있는 파일을 업로드하면,<br/><strong class="font-extrabold">정보와 맞는 맞춤형 결과</strong>를 얻을 수 있습니다.',
       width: "540px",
       height: "250px",
       expandContent: (
