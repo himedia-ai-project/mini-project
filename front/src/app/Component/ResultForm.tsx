@@ -1,27 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../common/ButtonCommon";
-import axiosInstance from "../lib/axios";
 
-export default function ResultForm() {
+interface ResultFormProps {
+  setExpandStates: (states: boolean[]) => void;
+}
+
+export default function ResultForm({ setExpandStates }: ResultFormProps) {
   const [result, setResult] = useState(null);
 
-  useEffect(() => {
-    const fetchResult = async () => {
-      try {
-        const { data } = await axiosInstance.get("/api/result");
-        setResult(data);
-      } catch (error) {
-        console.error("결과 데이터를 불러오는데 실패했습니다.", error);
-      }
-    };
-
-    fetchResult();
-  }, []);
-
+  const mockResult = [
+    {
+      id: 16,
+      description:
+        "포도당: 혈당 상승 유발`팜올레인유: 포화지방산 과다`식염: 나트륨 과다 섭취 위험",
+      type: "BAD",
+    },
+    {
+      id: 17,
+      description:
+        "해바라기유: 불포화지방산 공급`냉동 감자칩: 탄수화물 에너지 공급 (다만 섭취량 조절 필요)`페퍼솔트 씨즈닝: 소량의 나트륨과 향신료 공급 (과다 섭취 주의)",
+      type: "GOOD",
+    },
+    {
+      id: 18,
+      description:
+        "김영님은 당뇨병 환자이므로 해당 제품은 혈당 조절, 체중 관리 모두에 좋지 않은 영향을 미칠 수 있어 섭취를 지양하는 것이 좋습니다. 특히 포도당과 나트륨 함량이 높아 더욱 주의해야 합니다.",
+      type: "RESULT",
+    },
+  ];
   return (
-    <div className="w-[500px]">
+    <div className="w-[500px] ">
+      {/* 이미지 부분 */}
       <div className="mb-4 p-4 border rounded-md bg-gray-50 shadow-sm">
         <h2 className="text-lg font-bold text-black mb-2">입력한 정보</h2>
         <p className="text-black">저장된 내용 텍스트</p>
@@ -29,31 +40,63 @@ export default function ResultForm() {
           <span className="text-gray-500">저장된 이미지</span>
         </div>
       </div>
+      {/* 결과 텍스트 부분 */}
       <div>
         <p className="text-black font-bold">
           00님의 데이터를 기반으로 나온 결과입니다.
         </p>
       </div>
-      <div className="p-4 border rounded-md bg-gray-50 shadow-sm h-[400px] flex ">
+      <div className="p-4  h-auto border rounded-md bg-gray-50 shadow-sm h-[400px] flex ">
         {/*결과값 불러오기*/}
         {result ? (
           <pre>{JSON.stringify(result, null, 2)}</pre>
         ) : (
           <p>로딩 중...</p>
         )}
-        {/* <p className="text-black">
-          결과 텍스트 보여주기
+        <div className="text-black">
+          <div className="positive">
+            <h3>사용자와 맞지 않은 성분 정보</h3>
+            <br />
+            <br />
+
+            {mockResult.map((item) => (
+              <div
+                key={item.id}
+                className="mb-6 p-4 border rounded-lg shadow-sm"
+              >
+                <h3
+                  className={`text-lg font-semibold ${
+                    item.type === "BAD"
+                      ? "text-red-500"
+                      : item.type === "GOOD"
+                      ? "text-green-500"
+                      : "text-blue-500"
+                  }`}
+                >
+                  {item.type}
+                </h3>
+                <ul className="list-disc pl-5 mt-2">
+                  {item.description.split("`").map((desc, index) => (
+                    <li key={index} className="text-gray-700">
+                      {desc}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            <br />
+            <br />
+          </div>
           <br />
           <br />
-          1.(나이와 목적 특이사항)기반으로 업로드한 파일에서 안맞는 top3 성분
-          <br />
-          2.(나이와 목적 특이사항)기반으로 업로드한 파일에서 맞는 top3 성분
-          <br />
-          3.전체적인 결과
-        </p> */}
+          <div className="negative"></div>
+        </div>
       </div>
       <div className="flex justify-center items-center mt-4">
-        <Button text="결과 닫기" />
+        <Button
+          onClick={() => setExpandStates(new Array(4).fill(false))}
+          text="결과 닫기"
+        />
       </div>
     </div>
   );

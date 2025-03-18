@@ -1,13 +1,32 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Button from "../common/ButtonCommon";
+import axiosInstance from "../lib/axios";
 
-export default function ListForm() {
+interface ListFormProps {
+  setExpandStates: (states: boolean[]) => void;
+}
+
+export default function ListForm({ setExpandStates }: ListFormProps) {
+  const [result, setResult] = useState<any[]>([]);
   const userResults = [
-    { age: "25살", object: "감량중", issue: "알러지 있음" },
+    { age: "25살", object: "안녕하세요", issue: "알러지 있음" },
     { age: "30살", object: "감량중", issue: "당뇨" },
     { age: "35살", object: "운동중", issue: "저혈압" },
   ];
+
+  useEffect(() => {
+    const fetchUserResults = async () => {
+      try {
+        const { data } = await axiosInstance.get("/api/all");
+        setResult(data);
+      } catch (e) {
+        console.error("오류입니다", e);
+      }
+    };
+    fetchUserResults();
+  }, []);
 
   return (
     <>
@@ -31,7 +50,10 @@ export default function ListForm() {
       </div>
 
       <div className="flex justify-center items-center mt-[10px]">
-        <Button text="리스트 닫기" />
+        <Button
+          onClick={() => setExpandStates(new Array(4).fill(false))}
+          text="리스트 닫기"
+        />
       </div>
     </>
   );

@@ -132,7 +132,7 @@ export default function BoxWrap() {
       text: '입력된 데이터를 분석하여 내 정보와 맞는 <br/><strong class="font-extrabold">성분 결과와 전체적인 결과</strong>를 확인하세요!',
       width: "540px",
       height: "250px",
-      expandContent: <ResultForm />,
+      expandContent: <ResultForm setExpandStates={setExpandStates} />,
     },
     {
       imageSrc: "/main_4.svg",
@@ -142,7 +142,7 @@ export default function BoxWrap() {
       text: '입력된 데이터를 분석하여 내 결과와 함께 <strong class="font-extrabold"><br/>다른 사용자들의 결과정보</strong>  도 확인하세요!',
       width: "540px",
       height: "250px",
-      expandContent: <ListForm />,
+      expandContent: <ListForm setExpandStates={setExpandStates} />,
     },
   ];
 
