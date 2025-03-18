@@ -8,6 +8,23 @@ import FileInfoForm from "./FileInfoForm";
 import ResultForm from "./ResultForm";
 import ListForm from "./ListForm";
 
+interface FileInfoFormProps {
+  fileData: {
+    url: string | null;
+    file: File | null;
+    upload: boolean;
+  };
+  setFileData: React.Dispatch<
+    React.SetStateAction<{
+      url: string | null;
+      file: File | null;
+      upload: boolean;
+    }>
+  >;
+  handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleFileSubmit: () => void;
+}
+
 export default function BoxWrap() {
   // 4개의 박스를 기본으로 시작, 필요에 따라 확장
   const [expandStates, setExpandStates] = useState(new Array(4).fill(false));
@@ -24,8 +41,8 @@ export default function BoxWrap() {
 
   // 파일 업로드 박스 데이터
   const [fileData, setFileData] = useState({
-    url: null as string | null,
     file: null as File | null,
+    url: null as string | null,
     upload: false,
   });
 
@@ -65,7 +82,7 @@ export default function BoxWrap() {
   //데이터 전송 함수
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData + "안녕하세요");
+    console.log(fileData + "안녕하세요");
     try {
       // 호출하기
       // FormData 객체 생성
@@ -85,8 +102,18 @@ export default function BoxWrap() {
       });
 
       console.log(data);
+
+      // 파일 데이터 초기화
+      // setFileData({
+      //   url: null,
+      //   file: null,
+      //   upload: false,
+      // });
+
+      alert("정보가 성공적으로 제출되었습니다!");
     } catch (error) {
-      console.error(error);
+      console.error("제출 실패:", error);
+      alert("데이터 제출에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -132,7 +159,9 @@ export default function BoxWrap() {
       text: '입력된 데이터를 분석하여 내 정보와 맞는 <br/><strong class="font-extrabold">성분 결과와 전체적인 결과</strong>를 확인하세요!',
       width: "540px",
       height: "250px",
-      expandContent: <ResultForm setExpandStates={setExpandStates} />,
+      expandContent: (
+        <ResultForm fileData={fileData} toggleExpand={() => toggleExpand(2)} />
+      ),
     },
     {
       imageSrc: "/main_4.svg",
@@ -142,7 +171,7 @@ export default function BoxWrap() {
       text: '입력된 데이터를 분석하여 내 결과와 함께 <strong class="font-extrabold"><br/>다른 사용자들의 결과정보</strong>  도 확인하세요!',
       width: "540px",
       height: "250px",
-      expandContent: <ListForm setExpandStates={setExpandStates} />,
+      expandContent: <ListForm toggleExpand={() => toggleExpand(3)} />,
     },
   ];
 

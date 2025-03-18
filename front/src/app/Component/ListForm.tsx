@@ -5,10 +5,10 @@ import Button from "../common/ButtonCommon";
 import axiosInstance from "../lib/axios";
 
 interface ListFormProps {
-  setExpandStates: (states: boolean[]) => void;
+  toggleExpand: () => void;
 }
 
-export default function ListForm({ setExpandStates }: ListFormProps) {
+export default function ListForm({ toggleExpand }: ListFormProps) {
   const [result, setResult] = useState<any[]>([]);
   const userResults = [
     { age: "25살", object: "안녕하세요", issue: "알러지 있음" },
@@ -50,10 +50,7 @@ export default function ListForm({ setExpandStates }: ListFormProps) {
       </div>
 
       <div className="flex justify-center items-center mt-[10px]">
-        <Button
-          onClick={() => setExpandStates(new Array(4).fill(false))}
-          text="리스트 닫기"
-        />
+        <Button onClick={toggleExpand} text="리스트 닫기" />
       </div>
     </>
   );
