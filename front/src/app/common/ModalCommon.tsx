@@ -37,7 +37,6 @@ export default function ModalCommon({ onClose, userResults }: ModalProps) {
     },
   ];
 
-  console.log(userResults[0]?.age, "userResults");
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-[400px]">
