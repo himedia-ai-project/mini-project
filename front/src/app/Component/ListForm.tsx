@@ -8,11 +8,22 @@ interface ListFormProps {
   toggleExpand: () => void;
 }
 
+interface UserResult {
+  age: string;
+  object: string;
+  issue: string;
+  results: {
+    id: number;
+    description: string;
+    type: string;
+  }[];
+}
+
 export default function ListForm({ toggleExpand }: ListFormProps) {
   const [result, setResult] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const userResultsWithMock = [
+  const userResultsWithMock: UserResult[] = [
     {
       age: "25살",
       object: "안녕하세요",
@@ -87,9 +98,10 @@ export default function ListForm({ toggleExpand }: ListFormProps) {
     },
   ];
 
-  const handleModalOpen = (user: any) => {
+  const handleModalOpen = (user: UserResult) => {
+    setResult(user as any);
+
     setIsModalOpen(true);
-    setResult(user);
   };
   return (
     <>
@@ -122,7 +134,7 @@ export default function ListForm({ toggleExpand }: ListFormProps) {
         <ModalCommon
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          userResults={result}
+          selectedUser={result as unknown as UserResult}
         />
       )}
     </>

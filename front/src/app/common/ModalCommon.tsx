@@ -1,21 +1,27 @@
 "use client";
 
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  userResults: {
-    age: string;
-    object: string;
-    issue: string;
-    results: {
-      id: number;
-      description: string;
-      type: string;
-    };
+interface UserResult {
+  age: string;
+  object: string;
+  issue: string;
+  results: {
+    id: number;
+    description: string;
+    type: string;
   }[];
 }
 
-export default function ModalCommon({ onClose, userResults }: ModalProps) {
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  selectedUser: UserResult | null;
+}
+
+export default function ModalCommon({
+  isOpen,
+  onClose,
+  selectedUser,
+}: ModalProps) {
   const mockResult = [
     {
       id: 16,
@@ -43,9 +49,9 @@ export default function ModalCommon({ onClose, userResults }: ModalProps) {
         <h2 className="text-xl font-bold mb-4">유저 상세 정보</h2>
 
         <div>
-          {/* <p className="text-black">🔹 나이: {userResults?.age}</p>
-          <p className="text-black">🔹 목적: {userResults?.object}</p>
-          <p className="text-black">🔹 특이사항: {userResults?.issue}</p> */}
+          <p className="text-black">🔹 나이: {selectedUser?.age}</p>
+          <p className="text-black">🔹 목적: {selectedUser?.object}</p>
+          <p className="text-black">🔹 특이사항: {selectedUser?.issue}</p>
         </div>
 
         {mockResult.map((item) => (
