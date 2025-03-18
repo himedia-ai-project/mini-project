@@ -12,20 +12,15 @@ interface FormData {
 }
 
 export default function UserInfoForm({
-  handleSubmit,
   formData,
   setFormData,
 }: {
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formData: FormData;
   setFormData: (formData: FormData) => void;
 }) {
   return (
     <div className="flex flex-col items-center">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-2 items-center w-full max-w-md"
-      >
+      <form className="flex flex-col gap-2 items-center w-full max-w-md">
         <InputCommon
           labelName="이름"
           placeholder="이름을 입력해주세요.(ex 홍길동 or 길동)"

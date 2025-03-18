@@ -5,8 +5,8 @@ import Box from "../common/BoxCommon";
 import axiosInstance from "../lib/axios";
 import UserInfoForm from "./UserInfoForm";
 import FileInfoForm from "./FileInfoForm";
-import ResultForm from "./ResultForm";
 import ListForm from "./ListForm";
+import ResultForm from "./ResultForm";
 
 interface FileInfoFormProps {
   fileData: {
@@ -21,6 +21,7 @@ interface FileInfoFormProps {
       upload: boolean;
     }>
   >;
+
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleFileSubmit: () => void;
 }
@@ -59,16 +60,17 @@ export default function BoxWrap() {
   };
 
   // 파일 업로드 박스 데이터 제출 함수
-  const handleFileSubmit = () => {
-    if (!fileData.file) {
-      alert("파일을 업로드해야 합니다!");
-      return;
-    }
-    setFileData({
-      ...fileData,
-      upload: false,
-    });
-  };
+  // const handleFileSubmit = () => {
+  //   console.log(fileData + "안녕하세요");
+  //   if (!fileData.file) {
+  //     alert("파일을 업로드해야 합니다!");
+  //     return;
+  //   }
+  //   setFileData({
+  //     ...fileData,
+  //     upload: false,
+  //   });
+  // };
 
   // 박스 클릭 시 해당 박스의 상태를 토글하는 함수
   const toggleExpand = (index: number) => {
@@ -80,10 +82,16 @@ export default function BoxWrap() {
   };
 
   //데이터 전송 함수
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(fileData + "안녕하세요");
+  const handleSubmit = async () => {
+    if (!fileData.file) {
+      alert("파일을 업로드해야 합니다!");
+      return;
+    }
     try {
+      setFileData({
+        ...fileData,
+        upload: false,
+      });
       // 호출하기
       // FormData 객체 생성
       const formDataToSend = new FormData();
@@ -95,13 +103,11 @@ export default function BoxWrap() {
       formDataToSend.append("image", fileData.file as Blob);
 
       // 파일 업로드 요청
-      const { data } = await axiosInstance.post("/api/user", formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      console.log(data);
+      // const { data } = await axiosInstance.post("/api/user", formDataToSend, {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // });
 
       // 파일 데이터 초기화
       // setFileData({
@@ -127,11 +133,7 @@ export default function BoxWrap() {
       width: "540px",
       height: "250px",
       expandContent: (
-        <UserInfoForm
-          formData={formData}
-          setFormData={setFormData}
-          handleSubmit={handleSubmit}
-        />
+        <UserInfoForm formData={formData} setFormData={setFormData} />
       ),
     },
     {
@@ -147,7 +149,7 @@ export default function BoxWrap() {
           fileData={fileData}
           setFileData={setFileData}
           handleFileChange={handleFileChange}
-          handleFileSubmit={handleFileSubmit}
+          handleFileSubmit={handleSubmit}
         />
       ),
     },
