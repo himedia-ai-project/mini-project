@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Button from "../common/ButtonCommon";
 import axiosInstance from "../lib/axios";
+import ModalCommon from "../common/ModalCommon";
 
 interface ListFormProps {
   toggleExpand: () => void;
@@ -10,6 +11,7 @@ interface ListFormProps {
 
 export default function ListForm({ toggleExpand }: ListFormProps) {
   const [result, setResult] = useState<any[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const userResults = [
     { age: "25살", object: "안녕하세요", issue: "알러지 있음" },
     { age: "30살", object: "감량중", issue: "당뇨" },
@@ -38,6 +40,7 @@ export default function ListForm({ toggleExpand }: ListFormProps) {
         <ul className="space-y-2">
           {userResults.map((user, index) => (
             <li
+              onClick={() => setIsModalOpen(true)}
               key={`user-${index}`}
               className="border p-1 rounded-md shadow-sm bg-white transition"
             >
@@ -52,6 +55,15 @@ export default function ListForm({ toggleExpand }: ListFormProps) {
       <div className="flex justify-center items-center mt-[10px]">
         <Button onClick={toggleExpand} text="리스트 닫기" />
       </div>
+
+      {/* 모달 컴포넌트 */}
+      {isModalOpen && (
+        <ModalCommon
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          userResults={userResults}
+        />
+      )}
     </>
   );
 }
