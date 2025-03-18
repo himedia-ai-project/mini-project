@@ -21,8 +21,8 @@ public class Result {
     private String issue;
     private String object;
 
-    private List<Ingredients> ingredients = new ArrayList<>();
-    private List<Compatibility> compatibilities = new ArrayList<>();
-    private List<AgeWarnings> ageWarnings = new ArrayList<>();
+//    private List<Ingredients> ingredients = new ArrayList<>();
+//    private List<Compatibility> compatibilities = new ArrayList<>();
+//    private List<AgeWarnings> ageWarnings = new ArrayList<>();
     private List<TotalResult> totalResults = new ArrayList<>();
 }

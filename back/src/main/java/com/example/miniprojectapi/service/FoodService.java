@@ -121,7 +121,7 @@ public class FoodService {
         JsonNode goodNode = totalResultNode.path("good_ingredient");
         if (goodNode.isTextual()) {
             TotalResult result = new TotalResult();
-            result.setDescription(badNode.asText());
+            result.setDescription(goodNode.asText());
             result.setType(TotalType.GOOD);
             result.setUser(userInfo);
             totalResults.add(result);
@@ -170,9 +170,9 @@ public class FoodService {
                 .age(userInfo.getAge())
                 .issue(userInfo.getIssue())
                 .object(userInfo.getObject())
-                .ingredients(userInfo.getIngredients())
-                .compatibilities(userInfo.getCompatibilities())
-                .ageWarnings(userInfo.getAgeWarnings())
+//                .ingredients(userInfo.getIngredients())
+//                .compatibilities(userInfo.getCompatibilities())
+//                .ageWarnings(userInfo.getAgeWarnings())
                 .totalResults(userInfo.getTotalResults())
                 .build();
     }
