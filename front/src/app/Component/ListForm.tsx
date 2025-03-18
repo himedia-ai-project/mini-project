@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../common/ButtonCommon";
-import axiosInstance from "../lib/axios";
 import ModalCommon from "../common/ModalCommon";
 
 interface ListFormProps {
@@ -12,44 +11,6 @@ interface ListFormProps {
 export default function ListForm({ toggleExpand }: ListFormProps) {
   const [result, setResult] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const userResults = [
-    { age: "25살", object: "안녕하세요", issue: "알러지 있음" },
-    { age: "30살", object: "감량중", issue: "당뇨" },
-    { age: "35살", object: "운동중", issue: "저혈압" },
-  ];
-
-  // useEffect(() => {
-  //   const fetchUserResults = async () => {
-  //     try {
-  //       const { data } = await axiosInstance.get("/api/all");
-  //       setResult(data);
-  //     } catch (e) {
-  //       console.error("오류입니다", e);
-  //     }
-  //   };
-  //   fetchUserResults();
-  // }, []);
-
-  const mockResult = [
-    {
-      id: 16,
-      description:
-        "포도당: 혈당 상승 유발`팜올레인유: 포화지방산 과다`식염: 나트륨 과다 섭취 위험",
-      type: "BAD",
-    },
-    {
-      id: 17,
-      description:
-        "해바라기유: 불포화지방산 공급`냉동 감자칩: 탄수화물 에너지 공급 (다만 섭취량 조절 필요)`페퍼솔트 씨즈닝: 소량의 나트륨과 향신료 공급 (과다 섭취 주의)",
-      type: "GOOD",
-    },
-    {
-      id: 18,
-      description:
-        "김영님은 당뇨병 환자이므로 해당 제품은 혈당 조절, 체중 관리 모두에 좋지 않은 영향을 미칠 수 있어 섭취를 지양하는 것이 좋습니다. 특히 포도당과 나트륨 함량이 높아 더욱 주의해야 합니다.",
-      type: "RESULT",
-    },
-  ];
 
   const userResultsWithMock = [
     {
@@ -138,9 +99,9 @@ export default function ListForm({ toggleExpand }: ListFormProps) {
         </h2>
 
         <ul className="space-y-2">
-          {userResultsWithMock.map((user, index) => (
+          {userResultsWithMock?.map((user, index) => (
             <li
-              onClick={() => handleModalOpen(user.results)}
+              onClick={() => handleModalOpen(user)}
               key={`user-${index}`}
               className="border p-1 rounded-md shadow-sm bg-white transition"
             >

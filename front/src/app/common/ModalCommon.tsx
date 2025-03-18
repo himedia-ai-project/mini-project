@@ -3,14 +3,19 @@
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  userResults: { age: string; object: string; issue: string }[];
+  userResults: {
+    age: string;
+    object: string;
+    issue: string;
+    results: {
+      id: number;
+      description: string;
+      type: string;
+    };
+  }[];
 }
 
-export default function ModalCommon({
-  isOpen,
-  onClose,
-  userResults,
-}: ModalProps) {
+export default function ModalCommon({ onClose, userResults }: ModalProps) {
   const mockResult = [
     {
       id: 16,
@@ -32,14 +37,17 @@ export default function ModalCommon({
     },
   ];
 
-  console.log(userResults, "userResults");
+  console.log(userResults[0]?.age, "userResults");
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-[400px]">
         <h2 className="text-xl font-bold mb-4">유저 상세 정보</h2>
-        <p className="text-black">🔹 나이: {}</p>
-        <p className="text-black">🔹 목적: {}</p>
-        <p className="text-black">🔹 특이사항: {}</p>
+
+        <div>
+          {/* <p className="text-black">🔹 나이: {userResults?.age}</p>
+          <p className="text-black">🔹 목적: {userResults?.object}</p>
+          <p className="text-black">🔹 특이사항: {userResults?.issue}</p> */}
+        </div>
 
         {mockResult.map((item) => (
           <div key={item.id} className="mb-6 p-4 border rounded-lg shadow-sm">
