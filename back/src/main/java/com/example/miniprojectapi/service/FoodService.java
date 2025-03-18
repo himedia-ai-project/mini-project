@@ -170,9 +170,9 @@ public class FoodService {
                 .age(userInfo.getAge())
                 .issue(userInfo.getIssue())
                 .object(userInfo.getObject())
-                .ingredients(userInfo.getIngredients())
-                .compatibilities(userInfo.getCompatibilities())
-                .ageWarnings(userInfo.getAgeWarnings())
+//                .ingredients(userInfo.getIngredients())
+//                .compatibilities(userInfo.getCompatibilities())
+//                .ageWarnings(userInfo.getAgeWarnings())
                 .totalResults(userInfo.getTotalResults())
                 .build();
     }
