@@ -26,7 +26,7 @@ export default function Box({
   onClick,
 }: BoxProps) {
   return (
-    <div className="flex items-center justify-center mb-[10px]">
+    <div className="flex items-center justify-center mb-[10px] ">
       <div
         className={`flex flex-col items-center justify-center rounded-md bg-[#E5EBFD] pt-[30px] pr-[25px] pb-[30px] pl-[25px] transition-all duration-500 ${
           isExpand ? "h-auto" : "h-[250px]"
@@ -59,7 +59,11 @@ export default function Box({
                   className="text-gray-700 text-left mb-[10px] text-[17px] break-words whitespace-normal"
                   dangerouslySetInnerHTML={{ __html: text }}
                 />
-                <Button text={buttonText} onClick={onClick || (() => {})} />
+                <Button
+                  className="cursor-pointer"
+                  text={buttonText}
+                  onClick={onClick || (() => {})}
+                />
               </div>
             </div>
           </>
