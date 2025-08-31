@@ -1,6 +1,6 @@
-# mini-project
+# 먹을까 말까?
 
-이 저장소는 백엔드(Spring Boot & FastAPI), 프론트엔드(React/Next.js), 데이터베이스(MySQL 등)를 Docker 기반으로 통합 관리하는 미니 프로젝트입니다.
+이 저장소는 백엔드(Spring Boot & FastAPI), 프론트엔드(React/Next.js), 데이터베이스(MySQL 등)를 Docker 기반으로 통합 관리하는 미니 프로젝트입니다
 
 ## 폴더 구조 및 주요 기능
 
